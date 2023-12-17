@@ -16,14 +16,17 @@ public class WordCounterClient {
             Scanner scanner = new Scanner(System.in);
             String userInput;
             do {
+            	// Prompts user to input message for Client to count
                 System.out.print("Enter a message (type 'exit' to quit): ");
                 userInput = scanner.nextLine();
                 out.println(userInput);
 
+                // Shows the client the word count 
                 String response = in.readLine();
                 System.out.println("Server response: " + response);
             } while (!userInput.equalsIgnoreCase("exit"));
 
+            // Closes program here...
             scanner.close();
             in.close();
             out.close();
