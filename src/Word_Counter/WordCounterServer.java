@@ -54,6 +54,7 @@ public class WordCounterServer {
                     if (inputLine.equalsIgnoreCase("exit")) {
                         break;
                     }
+                    // Output final result here
                     int wordCount = countWords(inputLine);
                     out.println("The total word count of this message is " + wordCount + (wordCount > 1 ? " words." : " word."));
                 }
