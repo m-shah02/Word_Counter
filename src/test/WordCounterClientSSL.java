@@ -14,7 +14,8 @@ public class WordCounterClientSSL{
 
             SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
             SSLSocket sslSocket = (SSLSocket) sslSocketFactory.createSocket("localhost", 9999);
-
+            
+            //TODO: Make it so that it shows the address and port of the thread connected
             System.out.println("Connected to server.");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(sslSocket.getInputStream()));
@@ -35,6 +36,7 @@ public class WordCounterClientSSL{
             in.close();
             out.close();
             sslSocket.close();
+            //TODO: Make it so that it shows the address and port of the thread connected
             System.out.println("Disconnected from server.");
         } catch (IOException | NoSuchAlgorithmException | KeyManagementException e) {
             e.printStackTrace();
