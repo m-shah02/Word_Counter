@@ -55,12 +55,6 @@ public class WordCounterServer {
                         break;
                     }
                     int wordCount = countWords(inputLine);
-//                    if(wordCount > 1) {
-//                    	out.println("The total word count of this message is " + wordCount + " words.");
-//                    }
-//                    else {
-//                    	out.println("The total word count of this message is " + wordCount + " word.");
-//                    }
                     out.println("The total word count of this message is " + wordCount + (wordCount > 1 ? " words." : " word."));
                 }
                 
