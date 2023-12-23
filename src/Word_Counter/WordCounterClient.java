@@ -9,10 +9,15 @@
 package Word_Counter;
 
 import java.io.*;
-import java.net.*;
 import java.util.Scanner;
 
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+
 public class WordCounterClient {
+	static int portNumber = 17777;
+	static final String TRUSTSTOREPATH = "C:\\Users\\asus\\eclipse-workspace\\Word_Counter\\src\\keys\\client.truststore";
+	static final String TRUSTSTOREPASS = "tpJ585GQ";
 	/**
 	 * The main method where the client connects to the server.
 	 * Then client performs the required task of providing sample text 
@@ -23,11 +28,24 @@ public class WordCounterClient {
 	 */
     public static void main(String[] args) {
         try {
-            Socket socket = new Socket("localhost", 9999);
+            // For SSL debugging purposes:
+            //System.setProperty("javax.net.debug", "ssl");
+
+            // Tells the client where the truststore and certificate is and sets it to be used for the client side ssl
+            System.setProperty("javax.net.ssl.trustStore", TRUSTSTOREPATH);
+            System.setProperty("javax.net.ssl.trustStorePassword", TRUSTSTOREPASS);
+
+            // Implementing client side ssl
+            SSLSocketFactory ssf = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            SSLSocket s = (SSLSocket) ssf.createSocket("localhost", portNumber);
+            
+            s.setEnabledProtocols(new String[] {"TLSv1.3", "TLSv1.2"});
+            s.startHandshake(); // the SSL handshake
+            
             System.out.println("Connected to server.");
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            PrintWriter out = new PrintWriter(s.getOutputStream(), true);
 
             Scanner scanner = new Scanner(System.in);
             String userInput;
@@ -46,7 +64,7 @@ public class WordCounterClient {
             scanner.close();
             in.close();
             out.close();
-            socket.close();
+            s.close();
             System.out.println("Disconnected from server.");
         } catch (IOException e) {
             e.printStackTrace();

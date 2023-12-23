@@ -9,7 +9,12 @@ package Word_Counter;
 import java.io.*;
 import java.net.*;
 
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
+
 public class WordCounterServer {
+	static final String KEYSTOREPATH = "C:\\Users\\asus\\eclipse-workspace\\Word_Counter\\src\\keys\\wc.jks";
+	static final String KEYSTOREPASS = "tpJ585GQ";
 	/**
 	 * Main method for Generating server and creating threads to allow for multiple connections
 	 * 
@@ -17,12 +22,22 @@ public class WordCounterServer {
 	 */
     public static void main(String[] args) {
         try {
-            try (ServerSocket serverSocket = new ServerSocket(9999)) {
             	// Shows up before a client connects
 				System.out.println("Server started. Waiting for client...");
+				
+				//System.setProperty("javax.net.debug", "all");		//for debugging
 
+			    //tell the execution environment where the keystore (and the certificate) is
+			    System.setProperty("javax.net.ssl.keyStore", KEYSTOREPATH);
+			    System.setProperty("javax.net.ssl.keyStorePassword", KEYSTOREPASS);
+
+			    SSLServerSocketFactory ssf = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+			    SSLServerSocket ss = (SSLServerSocket) ssf.createServerSocket(17777);
+			    
+			    ss.setEnabledProtocols(new String[]{"TLSv1.3", "TLSv1.2"});
+			    
 				while (true) {
-				    Socket clientSocket = serverSocket.accept();
+				    Socket clientSocket = ss.accept();
 				    
 				    // Get Address and port for the print statement below
 				    String clientAddress = clientSocket.getInetAddress().getHostAddress();
@@ -34,7 +49,6 @@ public class WordCounterServer {
 				    Thread thread = new Thread(clientHandler);
 				    thread.start();
 				}
-			}
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,6 +79,7 @@ public class WordCounterServer {
         @Override
         public void run() {
             try {
+
             	// Get client's IP address and port
                 String clientAddress = clientSocket.getInetAddress().getHostAddress();
                 int clientPort = clientSocket.getPort();
