@@ -15,9 +15,11 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
 public class WordCounterClient {
+	
 	static int portNumber = 17777;
 	static final String TRUSTSTOREPATH = "C:\\Users\\asus\\eclipse-workspace\\Word_Counter\\src\\keys\\client.truststore";
 	static final String TRUSTSTOREPASS = "tpJ585GQ";
+	
 	/**
 	 * The main method where the client connects to the server.
 	 * Then client performs the required task of providing sample text 
@@ -35,7 +37,7 @@ public class WordCounterClient {
             System.setProperty("javax.net.ssl.trustStore", TRUSTSTOREPATH);
             System.setProperty("javax.net.ssl.trustStorePassword", TRUSTSTOREPASS);
 
-            // Implementing client side ssl
+            // Implementing Client-side SSL
             SSLSocketFactory ssf = (SSLSocketFactory) SSLSocketFactory.getDefault();
             SSLSocket s = (SSLSocket) ssf.createSocket("localhost", portNumber);
             

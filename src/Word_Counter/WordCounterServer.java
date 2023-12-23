@@ -13,8 +13,10 @@ import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 
 public class WordCounterServer {
+	
 	static final String KEYSTOREPATH = "C:\\Users\\asus\\eclipse-workspace\\Word_Counter\\src\\keys\\wc.jks";
 	static final String KEYSTOREPASS = "tpJ585GQ";
+	
 	/**
 	 * Main method for Generating server and creating threads to allow for multiple connections
 	 * 
@@ -30,7 +32,8 @@ public class WordCounterServer {
 			    //tell the execution environment where the keystore (and the certificate) is
 			    System.setProperty("javax.net.ssl.keyStore", KEYSTOREPATH);
 			    System.setProperty("javax.net.ssl.keyStorePassword", KEYSTOREPASS);
-
+			    
+			    // Implementing Server-Side SSL
 			    SSLServerSocketFactory ssf = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
 			    SSLServerSocket ss = (SSLServerSocket) ssf.createServerSocket(17777);
 			    
