@@ -14,7 +14,7 @@ import javax.net.ssl.SSLServerSocketFactory;
 
 public class WordCounterServer {
 	
-	static final String KEYSTOREPATH = "C:\\Users\\asus\\eclipse-workspace\\Word_Counter\\src\\keys\\wc.jks";
+	static final String KEYSTOREPATH = "src\\keys\\wc.jks";
 	static final String KEYSTOREPASS = "tpJ585GQ";
 	
 	/**
