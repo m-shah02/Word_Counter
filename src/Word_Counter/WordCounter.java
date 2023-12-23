@@ -1,3 +1,6 @@
+/**
+ * Functional implementation of Word Counter without Client/Server TCP/UDP model attached...
+ */
 package Word_Counter;
 
 import java.util.Scanner;
