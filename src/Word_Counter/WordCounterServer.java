@@ -92,7 +92,7 @@ public class WordCounterServer {
 
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
-                    System.out.println("Received message from client: " + inputLine);
+                    System.out.println("Received message from client (" + clientAddress + ":" + clientPort + "): " + inputLine);
                     
                     // Ends program for client when client inputs "exit"
                     if (inputLine.equalsIgnoreCase("exit")) {
