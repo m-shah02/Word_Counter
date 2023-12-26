@@ -24,6 +24,7 @@ import javax.net.ssl.SSLSocketFactory;
  */
 public class WordCounterClient {
 	
+	//Port Number
 	static int portNumber = 17777;
 	// Directory and password for truststore
 	static final String TRUSTSTOREPATH = "src\\keys\\client.truststore";

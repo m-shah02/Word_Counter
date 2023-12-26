@@ -21,6 +21,8 @@ import javax.net.ssl.SSLServerSocketFactory;
  */
 public class WordCounterServer {
 	
+	// Port Number
+	static int portNumber = 17777;
 	// Directory and password for keystores
 	static final String KEYSTOREPATH = "src\\keys\\wc.jks";
 	static final String KEYSTOREPASS = "tpJ585GQ";
@@ -58,7 +60,7 @@ public class WordCounterServer {
 			    
 			    // Implementing Server-Side SSL
 			    SSLServerSocketFactory ssf = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-			    SSLServerSocket ss = (SSLServerSocket) ssf.createServerSocket(17777);
+			    SSLServerSocket ss = (SSLServerSocket) ssf.createServerSocket(portNumber);
 			    
 			    ss.setEnabledProtocols(new String[]{"TLSv1.3", "TLSv1.2"});
 			    
