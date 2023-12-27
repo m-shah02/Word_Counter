@@ -78,7 +78,9 @@ public class WordCounterClient {
 
                 // Shows the client the word count 
                 String response = in.readLine();
-                System.out.println("Server response: " + response);
+                if(response != null) {
+                	System.out.println("Server response: " + response);
+                }
             } while (!userInput.equalsIgnoreCase("exit"));
 
             // Closes program here...
