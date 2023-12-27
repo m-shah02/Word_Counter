@@ -77,9 +77,14 @@ public class WordCounterServer {
 				    Thread thread = new Thread(clientHandler);
 				    thread.start();
 				}
-        } catch (IOException e) {
+        } 
+        catch(SocketException s){
+        	System.out.println("Client disconnected");
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
+        
     }
     
     /**
@@ -158,7 +163,11 @@ public class WordCounterServer {
                 out.close();
                 clientSocket.close();
                 System.out.println("Client (" + clientAddress + ":" + clientPort + ") disconnected");
-            } catch (IOException e) {
+            } 
+            catch(SocketException s){
+            	System.out.println("Client disconnected");
+            }
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }

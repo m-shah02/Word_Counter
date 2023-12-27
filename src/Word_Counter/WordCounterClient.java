@@ -1,6 +1,7 @@
 package Word_Counter;
 
 import java.io.*;
+import java.net.SocketException;
 import java.util.Scanner;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
@@ -59,7 +60,7 @@ public class WordCounterClient {
             s.startHandshake(); // the SSL handshake
             
             // Sends message to say there's been a successful connection to the server
-            System.out.println("Connected to server.");
+            System.out.println("Connected to server from: " + s.getLocalAddress() + ":" + s.getLocalPort());
 
             // Used to create buffered reader that reads data from server
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -85,9 +86,13 @@ public class WordCounterClient {
             in.close();
             out.close();
             s.close();
-            System.out.println("Disconnected from server.");
-        } catch (IOException e) {
+        } 
+        catch(SocketException s){}
+        catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+        	System.out.println("Disconnected from server.");
         }
     }
 }
