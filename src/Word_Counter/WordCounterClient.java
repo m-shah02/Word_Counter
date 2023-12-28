@@ -89,7 +89,7 @@ public class WordCounterClient {
             out.close();
             s.close();
         } 
-        catch(SocketException s){}
+        catch(SocketException s){ }
         catch (IOException e) {
             e.printStackTrace();
         }
